@@ -6,7 +6,7 @@ import { Bunny } from "@/components/illustrations/Bunny";
 import { Floaties, type Floaty } from "@/components/illustrations/Floaties";
 import { Teddy } from "@/components/illustrations/Teddy";
 import { copy } from "@/content/story";
-import { GhostButton } from "../Buttons";
+import { GhostButton, PrimaryButton } from "../Buttons";
 import { SceneLayout } from "../SceneLayout";
 import type { SceneProps } from "../types";
 
@@ -20,7 +20,7 @@ const RISING_HEARTS: readonly Floaty[] = [
   { shape: "petal", color: "#e4d6ff", size: 8, dx: "60px", dy: "-130px", spin: "140deg", dur: "6.6s", delay: "3s" },
 ];
 
-export function GoodbyeScene({ onRestart }: SceneProps) {
+export function GoodbyeScene({ onNext, onRestart }: SceneProps) {
   const { label, title, subtitle, signature, replay } = copy.goodbye;
 
   return (
@@ -37,7 +37,10 @@ export function GoodbyeScene({ onRestart }: SceneProps) {
         </div>
       }
       actions={
-        <div className="animate-enter [animation-delay:900ms]">
+        <div className="animate-enter [animation-delay:900ms] flex flex-wrap items-center justify-center gap-3">
+          <PrimaryButton onClick={onNext} className="px-6 py-3 text-[0.95rem]">
+            One last question... 🥺
+          </PrimaryButton>
           <GhostButton onClick={onRestart}>
             <RotateCcw aria-hidden className="size-4" />
             {replay}

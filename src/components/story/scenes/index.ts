@@ -1,13 +1,14 @@
 import type { ComponentType } from "react";
 import type { SceneProps } from "../types";
 import { ApologyScene } from "./ApologyScene";
+import { FinalQuestionScene } from "./FinalQuestionScene";
 import { FlowerScene } from "./FlowerScene";
 import { GoodbyeScene } from "./GoodbyeScene";
 import { HeartScene } from "./HeartScene";
 import { WelcomeScene } from "./WelcomeScene";
 import { WishScene } from "./WishScene";
 
-export type SceneId = "welcome" | "apology" | "heart" | "flower" | "wish" | "goodbye";
+export type SceneId = "welcome" | "apology" | "heart" | "flower" | "wish" | "goodbye" | "question";
 
 type SceneEntry = {
   id: SceneId;
@@ -26,4 +27,5 @@ export const SCENES: readonly SceneEntry[] = [
   { id: "flower", Component: FlowerScene, momentMs: 1500 },
   { id: "wish", Component: WishScene, momentMs: 2000 },
   { id: "goodbye", Component: GoodbyeScene },
+  { id: "question", Component: FinalQuestionScene },
 ];
