@@ -30,17 +30,6 @@ export const copy = {
     message:
       "I don’t expect everything to become normal overnight. I’d just love the chance to talk again, whenever you’re comfortable.",
   },
-  credits: {
-    label: "behind the scenes",
-    message:
-      "Website designed with love, coded with effort and debugged with approximately 100 emotional breakdowns. 😂",
-    notesTitle: "References",
-    notes: [
-      { label: "Grammar", value: "AI-assisted." },
-      { label: "Feelings", value: "100% PK-certified. ❤️" },
-    ],
-    cta: "One last thing",
-  },
   goodbye: {
     label: "until then",
     title: "That’s all, Smartest.",
