@@ -30,7 +30,7 @@ export function ApologyScene({ revealed, onReveal, onNext }: SceneProps) {
           <SpeechBubble className={revealedOnArrival ? undefined : "animate-pop [animation-delay:600ms]"}>
             {bubble}
           </SpeechBubble>
-          <Teddy pose="shy" className="mt-1 w-[min(67cqw,15.5rem,calc((100cqh-4rem)*0.95))]" />
+          <Teddy pose="shy" className="mt-1 w-[min(76cqw,15.5rem,calc((100cqh-4rem)*0.95))]" />
         </>
       }
       actions={revealed && <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 1.4} />}

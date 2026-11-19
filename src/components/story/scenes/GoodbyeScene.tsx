@@ -23,7 +23,7 @@ export function GoodbyeScene({ onRestart }: SceneProps) {
       stage={
         <>
           <Floaties items={RISING_HEARTS} className="left-1/2 top-[45%]" />
-          <Teddy pose="wave" className="w-[min(74cqw,17rem,94cqh)] animate-enter [animation-delay:100ms]" />
+          <Teddy pose="wave" className="w-[min(80cqw,17rem,94cqh)] animate-enter [animation-delay:100ms]" />
         </>
       }
       actions={

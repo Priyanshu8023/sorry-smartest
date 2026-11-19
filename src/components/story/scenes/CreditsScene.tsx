@@ -11,7 +11,7 @@ export function CreditsScene({ onNext }: SceneProps) {
   return (
     <SceneLayout
       label={label}
-      stage={<Teddy pose="coder" className="w-[min(64cqw,15rem,94cqh)] animate-enter [animation-delay:100ms]" />}
+      stage={<Teddy pose="coder" className="w-[min(72cqw,15rem,94cqh)] animate-enter [animation-delay:100ms]" />}
       actions={
         <div className="animate-enter [animation-delay:650ms]">
           <PrimaryButton onClick={onNext}>

@@ -27,12 +27,9 @@ type BloomingRoseProps = {
 /** A long-stemmed rose, tied with a ribbon and a little gift tag, that blooms when tapped. */
 export function BloomingRose({ open, onBloom, tag }: BloomingRoseProps) {
   const { id, paint } = useSvgIds();
-  const [celebrate, setCelebrate] = useState(false);
-
-  const bloom = () => {
-    setCelebrate(true);
-    onBloom();
-  };
+  // Celebrate only when the rose blooms during this visit, not when coming back to it.
+  const [openOnArrival] = useState(open);
+  const celebrate = open && !openOnArrival;
 
   // Each petal unfolds from its own hinge, staggered so the rose opens from the back to the front.
   const unfold = (x: number, y: number, closed: string, delayMs: number): CSSProperties => ({
@@ -42,7 +39,7 @@ export function BloomingRose({ open, onBloom, tag }: BloomingRoseProps) {
   });
 
   return (
-    <div className="@container relative aspect-[200/260] w-[min(64cqw,14.5rem,75cqh)]">
+    <div className="@container relative aspect-[200/260] w-[min(70cqw,14.5rem,75cqh)]">
       <div
         aria-hidden
         className="absolute -inset-x-[25%] -top-[4%] h-[62%] bg-[radial-gradient(closest-side,rgb(255_205_222/0.8),transparent)]"
@@ -147,7 +144,7 @@ export function BloomingRose({ open, onBloom, tag }: BloomingRoseProps) {
       {!open && (
         <button
           type="button"
-          onClick={bloom}
+          onClick={onBloom}
           aria-label="Help the rose bloom"
           className="absolute inset-0 cursor-pointer rounded-[2rem] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blush-300/70"
         />

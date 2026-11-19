@@ -8,14 +8,24 @@ import { HeartScene } from "./HeartScene";
 import { WelcomeScene } from "./WelcomeScene";
 import { WishScene } from "./WishScene";
 
-export const SCENES = [
+export type SceneId = "welcome" | "apology" | "heart" | "flower" | "wish" | "credits" | "goodbye";
+
+type SceneEntry = {
+  id: SceneId;
+  Component: ComponentType<SceneProps>;
+  /**
+   * Scenes with a moment (the apology reveal, mending, blooming, opening) play it on the first tap
+   * anywhere; this is how long (ms) the moment gets before another tap anywhere moves on.
+   */
+  momentMs?: number;
+};
+
+export const SCENES: readonly SceneEntry[] = [
   { id: "welcome", Component: WelcomeScene },
-  { id: "apology", Component: ApologyScene },
-  { id: "heart", Component: HeartScene },
-  { id: "flower", Component: FlowerScene },
-  { id: "wish", Component: WishScene },
+  { id: "apology", Component: ApologyScene, momentMs: 900 },
+  { id: "heart", Component: HeartScene, momentMs: 1300 },
+  { id: "flower", Component: FlowerScene, momentMs: 1500 },
+  { id: "wish", Component: WishScene, momentMs: 2000 },
   { id: "credits", Component: CreditsScene },
   { id: "goodbye", Component: GoodbyeScene },
-] as const satisfies ReadonlyArray<{ id: string; Component: ComponentType<SceneProps> }>;
-
-export type SceneId = (typeof SCENES)[number]["id"];
+];

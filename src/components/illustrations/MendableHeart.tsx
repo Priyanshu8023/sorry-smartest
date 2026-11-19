@@ -22,15 +22,12 @@ type MendableHeartProps = {
 };
 
 export function MendableHeart({ mended, onMend }: MendableHeartProps) {
-  const [celebrate, setCelebrate] = useState(false);
-
-  const mend = () => {
-    setCelebrate(true);
-    onMend();
-  };
+  // Celebrate only when the heart gets mended during this visit, not when coming back to it.
+  const [mendedOnArrival] = useState(mended);
+  const celebrate = mended && !mendedOnArrival;
 
   return (
-    <div className="relative aspect-[200/190] w-[min(74cqw,16.5rem,100cqh)]">
+    <div className="relative aspect-[200/190] w-[min(80cqw,16.5rem,100cqh)]">
       <div
         aria-hidden
         className={cn(
@@ -84,7 +81,7 @@ export function MendableHeart({ mended, onMend }: MendableHeartProps) {
       {!mended && (
         <button
           type="button"
-          onClick={mend}
+          onClick={onMend}
           aria-label="Mend the heart"
           className="absolute inset-0 cursor-pointer rounded-full focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blush-300/70"
         />

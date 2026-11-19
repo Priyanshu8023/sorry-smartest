@@ -10,7 +10,7 @@ export function WelcomeScene({ onNext }: SceneProps) {
   return (
     <SceneLayout
       label={label}
-      stage={<Teddy pose="heart" className="w-[min(74cqw,17rem,94cqh)] animate-enter [animation-delay:100ms]" />}
+      stage={<Teddy pose="heart" className="w-[min(80cqw,17rem,94cqh)] animate-enter [animation-delay:100ms]" />}
       actions={
         <div className="animate-enter [animation-delay:600ms]">
           <PrimaryButton onClick={onNext}>{cta}</PrimaryButton>

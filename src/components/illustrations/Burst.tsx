@@ -1,6 +1,7 @@
 "use client";
 
 import { m, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 import { cn } from "@/lib/cn";
 import { HEART_PATH, HEART_VIEWBOX, SPARKLE_PATH, SPARKLE_VIEWBOX } from "./paths";
 
@@ -17,7 +18,9 @@ type BurstProps = {
 /** A one-off ring of tiny hearts and sparkles flying outward from the centre. */
 export function Burst({ count = 12, distance = 120, delay = 0.2, className = "inset-0" }: BurstProps) {
   const reduceMotion = useReducedMotion();
-  if (reduceMotion) return null;
+  // Unmount once played, so the faded-out particles don't linger far off-centre and stretch the page.
+  const [finished, setFinished] = useState(false);
+  if (reduceMotion || finished) return null;
 
   return (
     <div aria-hidden className={cn("pointer-events-none absolute z-20", className)}>
@@ -40,6 +43,7 @@ export function Burst({ count = 12, distance = 120, delay = 0.2, className = "in
               opacity: [0, 1, 0],
             }}
             transition={{ duration: 1.3, delay, ease: [0.22, 1, 0.36, 1] }}
+            onAnimationComplete={i === 0 ? () => setFinished(true) : undefined}
           >
             <svg viewBox={isHeart ? HEART_VIEWBOX : SPARKLE_VIEWBOX} width={size} height={size} fill="currentColor">
               <path d={isHeart ? HEART_PATH : SPARKLE_PATH} />

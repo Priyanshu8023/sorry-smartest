@@ -23,15 +23,12 @@ type WishEnvelopeProps = {
 };
 
 export function WishEnvelope({ open, onOpen, message }: WishEnvelopeProps) {
-  const [celebrate, setCelebrate] = useState(false);
-
-  const openEnvelope = () => {
-    setCelebrate(true);
-    onOpen();
-  };
+  // Celebrate only when the envelope gets opened during this visit, not when coming back to it.
+  const [openOnArrival] = useState(open);
+  const celebrate = open && !openOnArrival;
 
   return (
-    <div className="relative w-[min(92cqw,19rem,100cqh)] pt-[30%]">
+    <div className="relative w-[min(96cqw,19rem,100cqh)] pt-[30%]">
       <div className="relative animate-float">
         <div className="@container relative aspect-[1.55] perspective-[1000px]">
           <div
@@ -97,7 +94,7 @@ export function WishEnvelope({ open, onOpen, message }: WishEnvelopeProps) {
           {!open && (
             <button
               type="button"
-              onClick={openEnvelope}
+              onClick={onOpen}
               aria-label="Open the envelope"
               className="absolute inset-0 z-10 cursor-pointer rounded-[1.1rem] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blush-300/70"
             />
