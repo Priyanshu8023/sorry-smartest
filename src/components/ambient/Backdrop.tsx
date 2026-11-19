@@ -1,11 +1,12 @@
 import type { CSSVars } from "@/lib/svg";
-import { CLOUD_PATH, CLOUD_VIEWBOX, HEART_PATH, HEART_VIEWBOX, SPARKLE_PATH, SPARKLE_VIEWBOX } from "../illustrations/paths";
+import { CLOUD_PATH, CLOUD_VIEWBOX, HEART_PATH, HEART_VIEWBOX, PETAL_PATH, PETAL_VIEWBOX, SPARKLE_PATH, SPARKLE_VIEWBOX } from "../illustrations/paths";
 
 const CLOUDS = [
   { className: "left-[-8%] top-[4%] w-44 sm:w-64", dur: "26s", delay: "-6s", opacity: 0.95 },
   { className: "right-[-10%] top-[18%] w-36 sm:w-56", dur: "32s", delay: "-14s", opacity: 0.85 },
   { className: "left-[-4%] bottom-[14%] w-32 sm:w-52", dur: "28s", delay: "-3s", opacity: 0.8 },
   { className: "right-[-6%] bottom-[2%] w-40 sm:w-60", dur: "36s", delay: "-20s", opacity: 0.9 },
+  { className: "left-[20%] top-[40%] w-28 sm:w-44", dur: "30s", delay: "-10s", opacity: 0.6 },
 ];
 
 const HEARTS = [
@@ -25,12 +26,46 @@ const SPARKLES = [
   { left: "76%", top: "64%", size: 11, dur: "3.2s", delay: "-0.2s", color: "#f9afc9" },
   { left: "48%", top: "6%", size: 10, dur: "4.4s", delay: "-3s", color: "#cbb9f6" },
   { left: "93%", top: "86%", size: 12, dur: "3.6s", delay: "-1.8s", color: "#ffcfb8" },
+  { left: "5%", top: "48%", size: 9, dur: "3.9s", delay: "-2.6s", color: "#e4daff" },
+  { left: "60%", top: "12%", size: 11, dur: "4.2s", delay: "-0.9s", color: "#ffcfb8" },
+  { left: "38%", top: "88%", size: 10, dur: "3.5s", delay: "-3.5s", color: "#f9afc9" },
 ];
 
-/** Dreamy sky behind the story: pastel glow, drifting clouds, rising hearts and twinkles. */
+const PETALS = [
+  { left: "15%", size: 10, dur: "14s", delay: "-2s", sway: "20px", spin: "120deg", color: "#f9afc9", alpha: 0.4 },
+  { left: "40%", size: 8, dur: "16s", delay: "-8s", sway: "-15px", spin: "160deg", color: "#ffc2d6", alpha: 0.35 },
+  { left: "60%", size: 11, dur: "13s", delay: "-5s", sway: "25px", spin: "-140deg", color: "#f48fb1", alpha: 0.4 },
+  { left: "85%", size: 9, dur: "15s", delay: "-11s", sway: "-20px", spin: "100deg", color: "#e4d6ff", alpha: 0.35 },
+  { left: "35%", size: 7, dur: "17s", delay: "-14s", sway: "18px", spin: "-120deg", color: "#ffcfb8", alpha: 0.3 },
+];
+
+const GLOWING_ORBS = [
+  { left: "10%", top: "20%", size: 180, color: "rgb(249 175 201 / 0.12)", dur: "8s" },
+  { left: "75%", top: "60%", size: 220, color: "rgb(203 185 246 / 0.1)", dur: "10s" },
+  { left: "50%", top: "80%", size: 160, color: "rgb(169 209 243 / 0.1)", dur: "9s" },
+];
+
+/** Dreamy sky behind the story: pastel glow, drifting clouds, rising hearts, falling petals and twinkles. */
 export function Backdrop() {
   return (
     <div aria-hidden className="bg-dreamy pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      {/* Soft glowing orbs for depth */}
+      {GLOWING_ORBS.map((orb, i) => (
+        <div
+          key={`orb-${i}`}
+          className="absolute animate-glow-pulse rounded-full blur-3xl"
+          style={{
+            left: orb.left,
+            top: orb.top,
+            width: orb.size,
+            height: orb.size,
+            background: orb.color,
+            "--dur": orb.dur,
+            animationDuration: orb.dur,
+          } as CSSVars}
+        />
+      ))}
+
       {CLOUDS.map((cloud, i) => (
         <div
           key={i}
@@ -41,6 +76,7 @@ export function Backdrop() {
             <defs>
               <linearGradient id={`backdrop-cloud-${i}`} x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stopColor="#ffffff" />
+                <stop offset="0.5" stopColor="#f8f4ff" />
                 <stop offset="1" stopColor="#ece8fb" />
               </linearGradient>
             </defs>
@@ -66,6 +102,28 @@ export function Backdrop() {
         >
           <svg viewBox={HEART_VIEWBOX} width={heart.size} height={heart.size} fill={heart.color}>
             <path d={HEART_PATH} />
+          </svg>
+        </span>
+      ))}
+
+      {/* Falling petals */}
+      {PETALS.map((petal, i) => (
+        <span
+          key={`petal-${i}`}
+          className="absolute -top-[5%] animate-petal-fall opacity-0"
+          style={
+            {
+              left: petal.left,
+              "--dur": petal.dur,
+              "--sway": petal.sway,
+              "--spin": petal.spin,
+              "--alpha": petal.alpha,
+              animationDelay: petal.delay,
+            } as CSSVars
+          }
+        >
+          <svg viewBox={PETAL_VIEWBOX} width={petal.size} height={petal.size * 1.5} fill={petal.color}>
+            <path d={PETAL_PATH} />
           </svg>
         </span>
       ))}

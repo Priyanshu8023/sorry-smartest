@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Bunny } from "@/components/illustrations/Bunny";
 import { MendableHeart } from "@/components/illustrations/MendableHeart";
 import { copy } from "@/content/story";
 import { ContinueButton } from "../Buttons";
@@ -15,7 +16,16 @@ export function HeartScene({ revealed, onReveal, onNext }: SceneProps) {
   return (
     <SceneLayout
       label={label}
-      stage={<MendableHeart mended={revealed} onMend={onReveal} />}
+      stage={
+        <div className="relative">
+          <MendableHeart mended={revealed} onMend={onReveal} />
+          {revealed && (
+            <div className="absolute -bottom-2 -right-4 animate-pop">
+              <Bunny pose="cheer" className="w-13 drop-shadow-xs" />
+            </div>
+          )}
+        </div>
+      }
       actions={
         revealed && (
           <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 1.7} autoFocus={!revealedOnArrival} />

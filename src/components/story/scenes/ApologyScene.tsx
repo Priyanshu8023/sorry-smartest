@@ -26,12 +26,21 @@ export function ApologyScene({ revealed, onReveal, onNext }: SceneProps) {
     <SceneLayout
       label={label}
       stage={
-        <>
+        <div className="relative">
+          {/* Scrapbook decorative elements */}
+          <div
+            aria-hidden
+            className="absolute -right-4 -top-3 h-3 w-10 rotate-6 rounded-sm bg-peach-200/70 shadow-sm [background-image:repeating-linear-gradient(45deg,transparent_0_4px,rgb(255_255_255/0.4)_4px_8px)]"
+          />
+          <div
+            aria-hidden
+            className="absolute -left-3 top-4 h-3 w-8 -rotate-12 rounded-sm bg-lilac-200/60 shadow-sm [background-image:repeating-linear-gradient(-45deg,transparent_0_4px,rgb(255_255_255/0.4)_4px_8px)]"
+          />
           <SpeechBubble className={revealedOnArrival ? undefined : "animate-pop [animation-delay:600ms]"}>
             {bubble}
           </SpeechBubble>
           <Teddy pose="shy" className="mt-1 w-[min(76cqw,15.5rem,calc((100cqh-4rem)*0.95))]" />
-        </>
+        </div>
       }
       actions={revealed && <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 1.4} />}
     >
@@ -68,14 +77,14 @@ function SpeechBubble({ children, className }: { children: ReactNode; className?
   return (
     <p
       className={cn(
-        "relative whitespace-nowrap rounded-[1.4rem] bg-white px-5 py-2.5 font-hand text-[clamp(1.15rem,8.2vw,1.7rem)] leading-none text-ink shadow-[0_10px_24px_-12px_rgb(150_90_140/0.45)] ring-1 ring-blush-100",
+        "relative whitespace-nowrap rounded-[1.4rem] bg-white/95 px-5 py-2.5 font-hand text-[clamp(1.15rem,8.2vw,1.7rem)] leading-none text-ink shadow-[0_10px_24px_-12px_rgb(150_90_140/0.45),0_2px_6px_-2px_rgb(200_160_190/0.2)] ring-1 ring-blush-100",
         className,
       )}
     >
       {children}
       <span
         aria-hidden
-        className="absolute -bottom-[7px] left-1/2 size-3.5 -translate-x-1/2 rotate-45 bg-white shadow-[1px_1px_0_0_var(--color-blush-100)]"
+        className="absolute -bottom-[7px] left-1/2 size-3.5 -translate-x-1/2 rotate-45 bg-white/95 shadow-[1px_1px_0_0_var(--color-blush-100)]"
       />
     </p>
   );

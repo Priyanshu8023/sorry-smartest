@@ -2,6 +2,7 @@
 
 import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m, type Variants } from "framer-motion";
 import { useCallback, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { LoadingScreen } from "../ambient/LoadingScreen";
 import { SCENES, type SceneId } from "./scenes";
 import { StoryHeader } from "./StoryHeader";
 
@@ -77,6 +78,7 @@ export function Story({ backdrop }: StoryProps) {
   return (
     <LazyMotion features={domAnimation} strict>
       <MotionConfig reducedMotion="user">
+        <LoadingScreen />
         <main
           onClick={handleTapAnywhere}
           className="safe-pad relative isolate flex min-h-svh items-center justify-center overflow-clip [--pad-x:0.75rem] [--pad-y:0.75rem] short:[--pad-y:0.5rem] landscape-phone:[--pad-y:0.5rem] desk:[--pad-x:1.5rem] desk:[--pad-y:2rem]"
@@ -84,11 +86,29 @@ export function Story({ backdrop }: StoryProps) {
           {backdrop}
           <h1 className="sr-only">A Little Sorry</h1>
 
-          <div className="glass-card relative flex h-safe-screen min-h-fit w-full max-w-[31rem] flex-col rounded-[2rem] px-4 pb-5 pt-4 short:rounded-[1.75rem] short:pb-3 short:pt-3 landscape-phone:max-w-[54rem] landscape-phone:rounded-[1.5rem] landscape-phone:px-5 landscape-phone:pb-3 landscape-phone:pt-2 desk:max-h-[46rem] desk:px-8 desk:pb-8 desk:pt-6">
+          <m.div
+            initial={{ opacity: 0, y: 20, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 2.2, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+            className="glass-card relative flex h-safe-screen min-h-fit w-full max-w-[31rem] flex-col rounded-[2rem] px-4 pb-5 pt-4 short:rounded-[1.75rem] short:pb-3 short:pt-3 landscape-phone:max-w-[54rem] landscape-phone:rounded-[1.5rem] landscape-phone:px-5 landscape-phone:pb-3 landscape-phone:pt-2 desk:max-h-[46rem] desk:px-8 desk:pb-8 desk:pt-6"
+          >
+            {/* Decorative washi tape */}
             <span
               aria-hidden
               className="absolute -top-2 left-1/2 h-6 w-24 -translate-x-1/2 -rotate-3 rounded-[3px] bg-blush-200/80 shadow-sm [background-image:repeating-linear-gradient(45deg,transparent_0_6px,rgb(255_255_255/0.45)_6px_12px)]"
             />
+            {/* Second washi tape for cuteness */}
+            <span
+              aria-hidden
+              className="absolute -top-1.5 left-1/2 ml-14 h-5 w-16 -translate-x-1/2 rotate-2 rounded-[3px] bg-lilac-200/60 shadow-sm [background-image:repeating-linear-gradient(-45deg,transparent_0_5px,rgb(255_255_255/0.4)_5px_10px)]"
+            />
+
+            {/* Subtle inner glow at top */}
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 h-24 rounded-t-[2rem] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgb(255_228_240/0.4),transparent)]"
+            />
+
             <StoryHeader index={index} total={SCENES.length} onBack={() => goTo(index - 1, -1)} />
 
             <AnimatePresence mode="wait" custom={direction} initial={false}>
@@ -111,7 +131,7 @@ export function Story({ backdrop }: StoryProps) {
                 />
               </m.div>
             </AnimatePresence>
-          </div>
+          </m.div>
         </main>
       </MotionConfig>
     </LazyMotion>

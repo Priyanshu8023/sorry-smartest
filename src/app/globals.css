@@ -14,6 +14,7 @@
 @theme inline {
   --font-sans: var(--font-nunito), ui-rounded, "Segoe UI", system-ui, sans-serif;
   --font-hand: var(--font-caveat), "Segoe Print", "Bradley Hand", cursive;
+  --font-display: var(--font-quicksand), var(--font-poppins), ui-rounded, system-ui, sans-serif;
 }
 
 @theme {
@@ -38,7 +39,12 @@
   --color-baby-200: #cfe6fb;
   --color-baby-300: #a9d1f3;
 
+  --color-peach-100: #fff0e6;
   --color-peach-200: #ffdcc8;
+  --color-peach-300: #ffcfb8;
+
+  --color-mint-100: #e8faf0;
+  --color-mint-200: #c5f0d9;
 
   --animate-enter: enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-pop: pop 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) both;
@@ -62,6 +68,14 @@
   --animate-floaty: floaty var(--dur, 6s) ease-in-out infinite;
   --animate-sway: sway 4.6s ease-in-out infinite;
   --animate-swing: swing 3.6s ease-in-out infinite;
+  --animate-shimmer: shimmer 3s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 4s ease-in-out infinite;
+  --animate-sparkle-pop: sparkle-pop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  --animate-loading-heart: loading-heart 1.4s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+  --animate-slide-up: slide-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-bounce-soft: bounce-soft 2s ease-in-out infinite;
+  --animate-petal-fall: petal-fall var(--dur, 12s) linear infinite;
 
   @keyframes enter {
     from {
@@ -346,6 +360,107 @@
       transform: rotate(11deg);
     }
   }
+
+  @keyframes shimmer {
+    0%, 100% {
+      opacity: 0.4;
+      transform: translateX(-3px);
+    }
+    50% {
+      opacity: 0.9;
+      transform: translateX(3px);
+    }
+  }
+
+  @keyframes glow-pulse {
+    0%, 100% {
+      opacity: 0.5;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.85;
+      transform: scale(1.06);
+    }
+  }
+
+  @keyframes sparkle-pop {
+    0% {
+      opacity: 0;
+      transform: scale(0) rotate(-30deg);
+    }
+    60% {
+      opacity: 1;
+      transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+  }
+
+  @keyframes loading-heart {
+    0%, 100% {
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.15);
+    }
+    40% {
+      transform: scale(0.95);
+    }
+    60% {
+      transform: scale(1.1);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes bounce-soft {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-4px);
+    }
+  }
+
+  @keyframes petal-fall {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, -10vh, 0) rotate(0deg);
+    }
+    10% {
+      opacity: var(--alpha, 0.6);
+    }
+    50% {
+      transform: translate3d(var(--sway, 30px), 50vh, 0) rotate(var(--spin, 90deg));
+    }
+    90% {
+      opacity: var(--alpha, 0.6);
+    }
+    100% {
+      opacity: 0;
+      transform: translate3d(0, 110vh, 0) rotate(var(--spin, 180deg));
+    }
+  }
 }
 
 @utility bg-dreamy {
@@ -353,19 +468,23 @@
   background-image:
     radial-gradient(60% 45% at 8% 6%, #ffdde9 0%, transparent 70%),
     radial-gradient(55% 45% at 95% 12%, #e8defe 0%, transparent 70%),
+    radial-gradient(50% 40% at 50% 50%, #fff5f8 0%, transparent 60%),
     radial-gradient(65% 50% at 88% 95%, #d8ecff 0%, transparent 70%),
-    radial-gradient(55% 45% at 5% 92%, #ffe5d4 0%, transparent 70%);
+    radial-gradient(55% 45% at 5% 92%, #ffe5d4 0%, transparent 70%),
+    radial-gradient(40% 35% at 30% 70%, #f3eeff 0%, transparent 65%);
 }
 
 @utility glass-card {
-  background: linear-gradient(165deg, rgb(255 255 255 / 0.8), rgb(255 255 255 / 0.52));
-  border: 1px solid rgb(255 255 255 / 0.85);
+  background: linear-gradient(165deg, rgb(255 255 255 / 0.82), rgb(255 255 255 / 0.55));
+  border: 1px solid rgb(255 255 255 / 0.88);
   box-shadow:
-    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    inset 0 1px 0 rgb(255 255 255 / 0.95),
+    inset 0 -1px 0 rgb(255 230 240 / 0.3),
     0 30px 80px -30px rgb(186 116 168 / 0.45),
-    0 12px 30px -18px rgb(140 120 200 / 0.3);
-  -webkit-backdrop-filter: blur(18px) saturate(1.15);
-  backdrop-filter: blur(18px) saturate(1.15);
+    0 12px 30px -18px rgb(140 120 200 / 0.3),
+    0 2px 8px -2px rgb(200 160 190 / 0.15);
+  -webkit-backdrop-filter: blur(20px) saturate(1.2);
+  backdrop-filter: blur(20px) saturate(1.2);
 }
 
 @utility letter-paper {
@@ -373,6 +492,13 @@
   background-image:
     radial-gradient(120% 80% at 50% 0%, #ffffff 0%, transparent 60%),
     linear-gradient(180deg, transparent 0%, rgb(255 228 238 / 0.45) 100%);
+}
+
+@utility glass-subtle {
+  background: linear-gradient(165deg, rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.35));
+  -webkit-backdrop-filter: blur(12px) saturate(1.1);
+  backdrop-filter: blur(12px) saturate(1.1);
+  border: 1px solid rgb(255 255 255 / 0.6);
 }
 
 /* Outer gutter that also clears notches, rounded corners and home indicators. */
@@ -397,6 +523,7 @@
     -webkit-tap-highlight-color: transparent;
     /* Tapping through the story shouldn't trigger double-tap zoom; pinch zoom still works. */
     touch-action: manipulation;
+    scroll-behavior: smooth;
   }
 
   body {
@@ -406,6 +533,18 @@
   ::selection {
     background: var(--color-blush-200);
     color: var(--color-ink);
+  }
+
+  /* Smoother scrollbar for the story */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(249 175 201 / 0.4);
+    border-radius: 999px;
   }
 }
 

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Bunny } from "@/components/illustrations/Bunny";
 import { WishEnvelope } from "@/components/illustrations/WishEnvelope";
 import { copy } from "@/content/story";
 import { ContinueButton } from "../Buttons";
@@ -15,7 +16,16 @@ export function WishScene({ revealed, onReveal, onNext }: SceneProps) {
   return (
     <SceneLayout
       label={label}
-      stage={<WishEnvelope open={revealed} onOpen={onReveal} message={message} />}
+      stage={
+        <div className="relative">
+          <WishEnvelope open={revealed} onOpen={onReveal} message={message} />
+          {revealed && (
+            <div className="absolute -bottom-1 -right-3 animate-pop">
+              <Bunny pose="shy" className="w-13 drop-shadow-xs" />
+            </div>
+          )}
+        </div>
+      }
       actions={
         revealed && (
           <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 2.3} autoFocus={!revealedOnArrival} />

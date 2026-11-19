@@ -18,7 +18,7 @@ export function StoryHeader({ index, total, onBack }: StoryHeaderProps) {
         disabled={!canGoBack}
         aria-label="Previous part"
         className={cn(
-          "grid size-11 cursor-pointer place-items-center rounded-full bg-white/70 text-ink-soft ring-1 ring-blush-100 transition hover:bg-white focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blush-300/70 short:size-10 landscape-phone:size-9",
+          "grid size-11 cursor-pointer place-items-center rounded-full bg-white/70 text-ink-soft ring-1 ring-blush-100 transition-all duration-300 hover:bg-white hover:shadow-[0_4px_12px_-4px_rgb(212_98_143/0.3)] hover:ring-blush-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blush-300/70 short:size-10 landscape-phone:size-9",
           !canGoBack && "invisible",
         )}
       >
@@ -33,8 +33,8 @@ export function StoryHeader({ index, total, onBack }: StoryHeaderProps) {
           <span
             key={i}
             className={cn(
-              "h-1.5 rounded-full transition-all duration-500",
-              i === index ? "w-6 bg-blush-400" : "w-1.5",
+              "h-2 rounded-full transition-all duration-500",
+              i === index ? "w-7 bg-gradient-to-r from-blush-400 to-lilac-400 shadow-[0_2px_8px_-2px_rgb(240_141_179/0.5)]" : "w-2",
               i < index && "bg-blush-300",
               i > index && "bg-lilac-200",
             )}

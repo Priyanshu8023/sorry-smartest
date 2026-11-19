@@ -38,7 +38,7 @@ export function WishEnvelope({ open, onOpen, message }: WishEnvelopeProps) {
 
           <m.div
             aria-hidden
-            className="letter-paper absolute inset-x-[6%] top-[7%] flex h-[86%] items-center justify-center rounded-[0.8rem] px-[6%] py-[4%] shadow-[0_10px_24px_-12px_rgb(150_90_130/0.5)] ring-1 ring-blush-100"
+            className="letter-paper absolute inset-x-[6%] top-[7%] flex h-[86%] items-center justify-center rounded-[0.8rem] px-[7%] py-[4%] shadow-[0_12px_28px_-12px_rgb(150_90_130/0.5)] ring-1 ring-blush-200/80"
             initial={false}
             animate={
               open
@@ -55,8 +55,12 @@ export function WishEnvelope({ open, onOpen, message }: WishEnvelopeProps) {
                 : { duration: 0 }
             }
           >
+            {/* Cute mini postal stamp */}
+            <div className="absolute right-[5%] top-[6%] flex items-center justify-center rounded-[3px] border border-dashed border-blush-300 bg-white/90 px-1.5 py-0.5 shadow-2xs">
+              <span className="font-hand text-[2.6cqw] font-bold text-blush-500 leading-none">PK ♡</span>
+            </div>
             <p className="text-center font-hand text-[7.2cqw] leading-[1.16] text-ink">{message}</p>
-            <svg viewBox={HEART_VIEWBOX} className="absolute bottom-[6%] right-[4%] w-[6%]" fill="#f9afc9">
+            <svg viewBox={HEART_VIEWBOX} className="absolute bottom-[6%] right-[5%] w-[6%]" fill="#f9afc9">
               <path d={HEART_PATH} />
             </svg>
           </m.div>

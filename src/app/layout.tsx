@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Caveat, Nunito } from "next/font/google";
+import { Caveat, Nunito, Quicksand, Poppins } from "next/font/google";
 import "./globals.css";
 
 const caveat = Caveat({
@@ -10,6 +10,19 @@ const caveat = Caveat({
 
 const nunito = Nunito({
   variable: "--font-nunito",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const poppins = Poppins({
+  variable: "--font-poppins",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
   display: "swap",
 });
@@ -29,7 +42,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${caveat.variable} ${nunito.variable} h-full`}>
+    <html lang="en" className={`${caveat.variable} ${nunito.variable} ${quicksand.variable} ${poppins.variable} h-full`}>
       <body className="min-h-full">{children}</body>
     </html>
   );
