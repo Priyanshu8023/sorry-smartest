@@ -19,11 +19,10 @@ export const copy = {
     message: "I know I can’t undo what happened, but I wish I could have handled things differently.",
   },
   flower: {
-    label: "a little bouquet",
-    hint: "A little bouquet for you 💐",
+    label: "a little flower",
+    hint: "Tap the rosebud",
     tag: ["for you,", "from PK ♡"],
-    message:
-      "Not just any flowers... a little bouquet for someone special. 💐\n\nI wish I could express everything through these flowers, but for now, this is my little way of saying I'm sorry.",
+    message: "A little reminder that some connections are worth treating with care.",
   },
   wish: {
     label: "a small wish",
