@@ -1,12 +1,11 @@
 "use client";
 
 import { m } from "framer-motion";
-import { RotateCcw } from "lucide-react";
 import { Bunny } from "@/components/illustrations/Bunny";
 import { Floaties, type Floaty } from "@/components/illustrations/Floaties";
 import { Teddy } from "@/components/illustrations/Teddy";
 import { copy } from "@/content/story";
-import { GhostButton, PrimaryButton } from "../Buttons";
+import { PrimaryButton } from "../Buttons";
 import { SceneLayout } from "../SceneLayout";
 import type { SceneProps } from "../types";
 
@@ -20,8 +19,8 @@ const RISING_HEARTS: readonly Floaty[] = [
   { shape: "petal", color: "#e4d6ff", size: 8, dx: "60px", dy: "-130px", spin: "140deg", dur: "6.6s", delay: "3s" },
 ];
 
-export function GoodbyeScene({ onNext, onRestart }: SceneProps) {
-  const { label, title, subtitle, signature, replay } = copy.goodbye;
+export function GoodbyeScene({ onNext }: SceneProps) {
+  const { label, title, subtitle, signature } = copy.goodbye;
 
   return (
     <SceneLayout
@@ -37,14 +36,10 @@ export function GoodbyeScene({ onNext, onRestart }: SceneProps) {
         </div>
       }
       actions={
-        <div className="animate-enter [animation-delay:900ms] flex flex-wrap items-center justify-center gap-3">
-          <PrimaryButton onClick={onNext} className="px-6 py-3 text-[0.95rem]">
+        <div className="animate-enter [animation-delay:900ms]">
+          <PrimaryButton onClick={onNext} className="px-7 py-3.5 text-[1rem]">
             One last question... 🥺
           </PrimaryButton>
-          <GhostButton onClick={onRestart}>
-            <RotateCcw aria-hidden className="size-4" />
-            {replay}
-          </GhostButton>
         </div>
       }
     >

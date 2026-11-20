@@ -37,6 +37,5 @@ export const copy = {
     title: "That’s all, Smartest.",
     subtitle: "Take your time. ❤️",
     signature: "Your well-wisher, PK",
-    replay: "Watch again",
   },
 } as const;

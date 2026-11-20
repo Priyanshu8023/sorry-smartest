@@ -224,14 +224,6 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
             </div>
           </div>
         }
-        actions={
-          <div className="animate-enter [animation-delay:600ms]">
-            <GhostButton onClick={onRestart}>
-              <RotateCcw aria-hidden className="size-4" />
-              Watch again
-            </GhostButton>
-          </div>
-        }
       >
         <div className="max-w-[24rem] px-2 py-4 space-y-4">
           <m.p
