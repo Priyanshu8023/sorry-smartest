@@ -117,7 +117,7 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
           Accept: "application/json",
         },
         body: JSON.stringify({
-          access_key: "ad6021a7-d1c9-4164-9a0e-5b195f6625ce",
+          access_key: "137822da-ef98-4487-b6be-cdbec29c6809",
           subject: "🎉 Smartest accepted your sorry! ❤️",
           from_name: "A Little Sorry",
           message: `Wonderful news! Smartest just clicked "YES, I FORGIVE YOU ❤️" on your website at ${new Date().toLocaleString()}.`,
