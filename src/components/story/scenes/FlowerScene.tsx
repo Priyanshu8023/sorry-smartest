@@ -4,13 +4,13 @@ import { useState } from "react";
 import { BloomingRose } from "@/components/illustrations/BloomingRose";
 import { Bunny } from "@/components/illustrations/Bunny";
 import { copy } from "@/content/story";
-import { ContinueButton } from "../Buttons";
+import { ContinueButton, PrimaryButton } from "../Buttons";
 import { HandwrittenMessage, RevealText } from "../RevealText";
 import { SceneLayout } from "../SceneLayout";
 import type { SceneProps } from "../types";
 
 export function FlowerScene({ revealed, onReveal, onNext }: SceneProps) {
-  const { label, hint, tag, message } = copy.flower;
+  const { label, hint, cta, tag, message } = copy.flower;
   const [revealedOnArrival] = useState(revealed);
 
   return (
@@ -27,12 +27,20 @@ export function FlowerScene({ revealed, onReveal, onNext }: SceneProps) {
         </div>
       }
       actions={
-        revealed && (
-          <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 1.9} autoFocus={!revealedOnArrival} />
-        )
+        <div className="flex flex-col items-center">
+          {!revealed ? (
+            <div className="animate-pop">
+              <PrimaryButton onClick={onReveal} className="px-6 py-3.5 text-[1rem]">
+                {cta}
+              </PrimaryButton>
+            </div>
+          ) : (
+            <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 2.0} autoFocus={!revealedOnArrival} />
+          )}
+        </div>
       }
     >
-      <RevealText revealed={revealed} hint={hint} delay={1}>
+      <RevealText revealed={revealed} hint={hint} delay={0.9}>
         <HandwrittenMessage>{message}</HandwrittenMessage>
       </RevealText>
     </SceneLayout>

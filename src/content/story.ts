@@ -20,9 +20,11 @@ export const copy = {
   },
   flower: {
     label: "a little flower",
-    hint: "Tap the rosebud",
+    hint: "Tap the rosebud to help it bloom 🌹",
+    cta: "A little flower for you 🌹",
     tag: ["for you,", "from PK ♡"],
-    message: "A little reminder that some connections are worth treating with care.",
+    message:
+      "Not just any flower... a little rose for someone special. 🌹\n\nI wish I could express everything through this one flower, but for now, this is my little way of saying I'm sorry.",
   },
   wish: {
     label: "a small wish",
