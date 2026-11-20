@@ -28,7 +28,12 @@ export function WishScene({ revealed, onReveal, onNext }: SceneProps) {
       }
       actions={
         revealed && (
-          <ContinueButton onClick={onNext} delay={revealedOnArrival ? 0 : 2.3} autoFocus={!revealedOnArrival} />
+          <ContinueButton
+            onClick={onNext}
+            label="One last question... 🥺"
+            delay={revealedOnArrival ? 0 : 2.3}
+            autoFocus={!revealedOnArrival}
+          />
         )
       }
     >

@@ -2,7 +2,7 @@
 
 A small, animated, interactive story for Smartest, made with Next.js, React, Tailwind CSS and Framer Motion.
 
-It plays as seven short scenes: a hello, the apology, a heart to mend, a rose to bloom, an envelope to open, a funny "behind the scenes" note, and a goodbye. There's no music and no pressure to respond, and you can go back or watch it again at any time.
+It plays as six short scenes: a hello, the apology, a heart to mend, a rose to bloom, an envelope to open, and the final question ("Will you accept my sorry? 🥺❤️"). There's no autoplay music, and you can go back or replay at any time.
 
 Tap anywhere to move along. On a scene with a little moment (the apology, the heart, the rose, the envelope), the first tap plays that moment and the next one turns the page, so nothing gets skipped by accident.
 
