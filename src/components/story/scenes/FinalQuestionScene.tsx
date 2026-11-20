@@ -203,7 +203,7 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
               With lots of care,
             </p>
             <p className="font-hand text-[clamp(1.25rem,1rem+1.8vw,1.55rem)] font-bold text-blush-600">
-              Your well-wisher, PK ❤️
+              {"Your Constant < 3"}
             </p>
           </m.div>
         </div>
@@ -243,7 +243,7 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
             I will always wish the absolute best for you, Smartest. Take care of yourself.
           </m.p>
           <p className="font-hand text-lg font-bold text-blush-500 pt-2">
-            — PK ♡
+            {"— Your Constant < 3"}
           </p>
         </div>
       </SceneLayout>

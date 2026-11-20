@@ -36,6 +36,6 @@ export const copy = {
     label: "until then",
     title: "That’s all, Smartest.",
     subtitle: "Take your time. ❤️",
-    signature: "Your well-wisher, PK",
+    signature: "Your Constant < 3",
   },
 } as const;
