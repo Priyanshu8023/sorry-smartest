@@ -40,9 +40,10 @@ const PETALS = [
 ];
 
 const GLOWING_ORBS = [
-  { left: "10%", top: "20%", size: 180, color: "rgb(249 175 201 / 0.12)", dur: "8s" },
-  { left: "75%", top: "60%", size: 220, color: "rgb(203 185 246 / 0.1)", dur: "10s" },
-  { left: "50%", top: "80%", size: 160, color: "rgb(169 209 243 / 0.1)", dur: "9s" },
+  { left: "10%", top: "18%", size: 210, color: "rgb(255 179 198 / 0.16)", dur: "8s" },
+  { left: "75%", top: "55%", size: 240, color: "rgb(203 185 246 / 0.14)", dur: "10s" },
+  { left: "50%", top: "35%", size: 190, color: "rgb(255 230 217 / 0.14)", dur: "9s" },
+  { left: "20%", top: "82%", size: 200, color: "rgb(255 228 232 / 0.18)", dur: "11s" },
 ];
 
 /** Dreamy sky behind the story: pastel glow, drifting clouds, rising hearts, falling petals and twinkles. */

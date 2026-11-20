@@ -55,8 +55,9 @@ export function PrimaryButton({ className, onClick, children, ...props }: Primar
   return (
     <m.button
       type="button"
-      whileHover={{ y: -3, scale: 1.03 }}
+      whileHover={{ y: -3, scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 450, damping: 18 }}
       className={cn(
         "relative inline-flex cursor-pointer items-center gap-2 rounded-full bg-linear-to-r from-blush-200 via-[#ffdbe8] to-lilac-200 px-7 py-3.5 text-[1.05rem] font-bold text-ink ring-1 ring-white/80",
         "shadow-[0_12px_28px_-12px_rgb(212_98_143/0.6),inset_0_1px_0_rgb(255_255_255/0.9)] transition-all duration-300 hover:shadow-[0_18px_34px_-12px_rgb(212_98_143/0.7),inset_0_1px_0_rgb(255_255_255/0.9)]",
@@ -77,8 +78,9 @@ export function GhostButton({ className, ...props }: HTMLMotionProps<"button">) 
   return (
     <m.button
       type="button"
-      whileHover={{ y: -2, scale: 1.02 }}
+      whileHover={{ y: -2, scale: 1.04 }}
       whileTap={{ scale: 0.96 }}
+      transition={{ type: "spring", stiffness: 450, damping: 18 }}
       className={cn(
         "inline-flex cursor-pointer items-center gap-2 rounded-full bg-white/60 px-5 py-2.5 text-sm font-semibold text-ink-soft ring-1 ring-blush-200 transition-all duration-300 hover:bg-white/90 hover:shadow-[0_8px_20px_-10px_rgb(212_98_143/0.3)]",
         focusRing,

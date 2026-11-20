@@ -1,9 +1,9 @@
 import { cn } from "@/lib/cn";
 import type { CSSVars } from "@/lib/svg";
-import { HEART_PATH, HEART_VIEWBOX, PETAL_PATH, PETAL_VIEWBOX } from "./paths";
+import { HEART_PATH, HEART_VIEWBOX, PETAL_PATH, PETAL_VIEWBOX, SPARKLE_PATH, SPARKLE_VIEWBOX } from "./paths";
 
 export type Floaty = {
-  shape: "heart" | "petal";
+  shape: "heart" | "petal" | "sparkle";
   color: string;
   size: number;
   dx: string;
@@ -19,12 +19,15 @@ type FloatiesProps = {
   className: string;
 };
 
-/** Gently looping hearts or petals drifting away from a single point (pure CSS). */
+/** Gently looping hearts, petals or sparkles drifting away from a single point (pure CSS). */
 export function Floaties({ items, className }: FloatiesProps) {
   return (
     <div aria-hidden className={cn("pointer-events-none absolute size-0", className)}>
       {items.map((item, i) => {
         const isHeart = item.shape === "heart";
+        const isSparkle = item.shape === "sparkle";
+        const viewBox = isHeart ? HEART_VIEWBOX : isSparkle ? SPARKLE_VIEWBOX : PETAL_VIEWBOX;
+        const path = isHeart ? HEART_PATH : isSparkle ? SPARKLE_PATH : PETAL_PATH;
         return (
           <span
             key={i}
@@ -40,12 +43,12 @@ export function Floaties({ items, className }: FloatiesProps) {
             }
           >
             <svg
-              viewBox={isHeart ? HEART_VIEWBOX : PETAL_VIEWBOX}
+              viewBox={viewBox}
               width={item.size}
-              height={isHeart ? item.size : item.size * 1.5}
+              height={item.shape === "petal" ? item.size * 1.5 : item.size}
               fill={item.color}
             >
-              <path d={isHeart ? HEART_PATH : PETAL_PATH} />
+              <path d={path} />
             </svg>
           </span>
         );

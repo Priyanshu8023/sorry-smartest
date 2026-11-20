@@ -18,14 +18,6 @@ const TEASE_MESSAGES = [
   "Oops, missed me!",
 ];
 
-const DODGE_POSITIONS = [
-  { x: 75, y: -45 },
-  { x: -85, y: 35 },
-  { x: 80, y: 50 },
-  { x: -75, y: -40 },
-  { x: 70, y: -20 },
-];
-
 /** Full-screen celebratory particles when YES is clicked */
 function CelebrationParticles() {
   const particles = Array.from({ length: 28 }, (_, i) => {
@@ -87,31 +79,55 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
   const [decision, setDecision] = useState<"pending" | "accepted" | "rejected">("pending");
   const [dodgeCount, setDodgeCount] = useState(0);
   const [teaseText, setTeaseText] = useState<string | null>(null);
-  const [noOffset, setNoOffset] = useState({ x: 0, y: 0 });
-  const isDodgingRef = useRef(false);
+  const lastTapRef = useRef(0);
 
-  const handleDodge = useCallback(() => {
+  // Each time NO is clicked/tapped, it shrinks slightly in place, and YES grows slightly
+  const noScale = Math.max(0.66, 1 - dodgeCount * 0.07);
+  const yesScale = Math.min(1.22, 1 + dodgeCount * 0.045);
+
+  const handleNoInteraction = useCallback((e?: React.SyntheticEvent) => {
     if (decision !== "pending") return;
+    if (e) {
+      e.stopPropagation();
+    }
+
+    const now = Date.now();
+    if (now - lastTapRef.current < 300) return;
+    lastTapRef.current = now;
 
     if (dodgeCount < TEASE_MESSAGES.length) {
-      const nextDodge = dodgeCount + 1;
-      setDodgeCount(nextDodge);
-      setTeaseText(TEASE_MESSAGES[dodgeCount % TEASE_MESSAGES.length]);
-      const nextPos = DODGE_POSITIONS[dodgeCount % DODGE_POSITIONS.length];
-      setNoOffset(nextPos);
+      const currentDodge = dodgeCount;
+      setDodgeCount(currentDodge + 1);
+      setTeaseText(TEASE_MESSAGES[currentDodge]);
     } else {
-      // After all lines used, keep button reachable for her genuine choice
-      setTeaseText("I will listen to whatever you choose... 🥺");
-      setNoOffset({ x: 0, y: 0 });
+      // Clicked NO on the final try after all lines: reveal gentle decision message!
+      setDecision("rejected");
     }
   }, [decision, dodgeCount]);
 
-  const handleNoClick = useCallback(() => {
-    setDecision("rejected");
-  }, []);
-
   const handleYesClick = useCallback(() => {
     setDecision("accepted");
+
+    // Silently notify Priyanshu via email that Smartest accepted the apology
+    try {
+      fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "ad6021a7-d1c9-4164-9a0e-5b195f6625ce",
+          subject: "🎉 Smartest accepted your sorry! ❤️",
+          from_name: "A Little Sorry",
+          message: `Wonderful news! Smartest just clicked "YES, I FORGIVE YOU ❤️" on your website at ${new Date().toLocaleString()}.`,
+        }),
+      }).catch(() => {
+        // Silently ignore network failures to never disrupt celebration UI
+      });
+    } catch {
+      // Fail-safe to ensure the instant celebration animation runs smoothly
+    }
   }, []);
 
   // 1. ACCEPTED (YES) STATE
@@ -243,7 +259,7 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
             I will always wish the absolute best for you, Smartest. Take care of yourself.
           </m.p>
           <p className="font-hand text-lg font-bold text-blush-500 pt-2">
-            {"— Your Constant < 3"}
+            — PK ♡
           </p>
         </div>
       </SceneLayout>
@@ -284,32 +300,26 @@ export function FinalQuestionScene({ onRestart }: SceneProps) {
 
           {/* Action Buttons: YES and Playful NO */}
           <div className="relative flex items-center justify-center gap-4 min-h-[4rem] w-full">
-            {/* YES Button */}
-            <PrimaryButton
-              onClick={handleYesClick}
-              className="px-6 py-3.5 text-[1rem] shadow-[0_14px_28px_-10px_rgb(212_98_143/0.65)] hover:scale-105"
-            >
-              YES, I FORGIVE YOU ❤️
-            </PrimaryButton>
-
-            {/* Playful Dodging NO Button */}
+            {/* YES Button (grows slightly on each NO attempt) */}
             <m.div
-              animate={{ x: noOffset.x, y: noOffset.y }}
+              animate={{ scale: yesScale }}
+              transition={{ type: "spring", stiffness: 350, damping: 20 }}
+            >
+              <PrimaryButton
+                onClick={handleYesClick}
+                className="px-6 py-3.5 text-[0.95rem] sm:text-[1rem] shadow-[0_14px_28px_-10px_rgb(212_98_143/0.65)] hover:scale-105"
+              >
+                YES, I FORGIVE YOU ❤️
+              </PrimaryButton>
+            </m.div>
+
+            {/* Playful Shrinking NO Button (stays in place, no jumping) */}
+            <m.div
+              animate={{ scale: noScale }}
               transition={{ type: "spring", stiffness: 380, damping: 22 }}
-              onMouseEnter={handleDodge}
-              onTouchStart={(e) => {
-                if (dodgeCount < TEASE_MESSAGES.length && !isDodgingRef.current) {
-                  isDodgingRef.current = true;
-                  e.preventDefault();
-                  handleDodge();
-                  setTimeout(() => {
-                    isDodgingRef.current = false;
-                  }, 400);
-                }
-              }}
             >
               <GhostButton
-                onClick={handleNoClick}
+                onClick={handleNoInteraction}
                 className="px-5 py-3 text-sm font-bold text-ink-soft/80 hover:text-ink border border-blush-200/80 bg-white/80 hover:bg-white"
               >
                 NO 🙈
