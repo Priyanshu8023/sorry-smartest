@@ -20,8 +20,8 @@ export function FlowerScene({ revealed, onReveal, onNext }: SceneProps) {
         <div className="relative">
           <BloomingRose open={revealed} onBloom={onReveal} tag={tag} />
           {revealed && (
-            <div className="absolute -bottom-1 -left-5 animate-pop">
-              <Bunny pose="cheer" className="w-14 drop-shadow-xs" />
+            <div className="absolute bottom-6 -left-6 animate-pop sm:-left-8">
+              <Bunny pose="cheer" className="w-13 drop-shadow-xs sm:w-14" />
             </div>
           )}
         </div>
